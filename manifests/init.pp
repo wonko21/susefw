@@ -11,8 +11,9 @@ class susefw {
         ensure  => installed,
     }
     service { 'SuSEfirewall2_init':
+        name    => $susefw::params::susefirewall_init,
         #ensure => running,
-        enable => true,
+        enable  => true,
     }
     service { "SuSEfirewall2_setup":
         name    => $susefw::params::susefirewall_setup,
