@@ -1,7 +1,12 @@
 # Class susefw
 #
 class susefw {
+    include susefw::params
     #
+    if $::operatingsystemrelease >= 12.3 {
+        Service { provider => 'systemd' }
+    }
+
     package { [ "iptables", "SuSEfirewall2", "yast2"]:
         ensure  => installed,
     }
@@ -9,7 +14,8 @@ class susefw {
         #ensure => running,
         enable => true,
     }
-    service { 'SuSEfirewall2_setup':
+    service { "SuSEfirewall2_setup":
+        name    => $susefw::params::susefirewall_setup,
         ensure  => running,
         enable  => true,
         require => Service["SuSEfirewall2_init"],
