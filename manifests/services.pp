@@ -10,9 +10,10 @@ define susefw::services (
     ) {
 
     include susefw
+    include susefw::params
     #
-    $fwcfg  = "/etc/sysconfig/SuSEfirewall2"
-    $helper = "/usr/local/sbin/susefw-puppet-helper.sh"
+    $fwcfg  = $susefw::params::firewall_config
+    $helper = $susefw::params::firewall_helper
 
     # must be upper case
     $fw_zone = upcase("$zone")
@@ -20,7 +21,7 @@ define susefw::services (
     case $type {
         service: { $fw_type = "service=service:" }
         tcpport: { $fw_type = "tcpport=" }
-        udpport: { $fw_type = "tcpport=" }
+        udpport: { $fw_type = "udpport=" }
     }
 
     # combine type and service
