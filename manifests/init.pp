@@ -28,6 +28,6 @@ class susefw {
         group   => root,
         mode    => 0755,
         path    => "/usr/local/sbin/susefw-puppet-helper.sh",
-        source  => "puppet:///susefw/susefw-puppet-helper.sh",
+        source  => "puppet:///modules/susefw/susefw-puppet-helper.sh",
     }
 }
